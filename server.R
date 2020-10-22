@@ -320,7 +320,7 @@ shinyServer(function(input, output, session) {
         their website can be found <a href="https://wonder.cdc.gov/">here</a>. <br><br>
         
         The GitHub repo for this project can be found <a href="https://github.com/jbwebster/WONDER_VISION">here</a> 
-        and my extended data science portfolio can be found <a href="https://github.com/jbwebster/Data-Science-Portfolio">here</a>.
+        and my extended data science portfolio can be found <a href="https://jbwebster.github.io/Data-Science-Portfolio/">here</a>.
         '
     })
     
