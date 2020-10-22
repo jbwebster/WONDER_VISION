@@ -8,6 +8,7 @@
 #
 
 library(shinydashboard)
+library(shinycssloaders)
 
 # Contents of app header
 header <- dashboardHeader(
@@ -33,9 +34,12 @@ body <- dashboardBody(
                     h3("Select filters for exploring the CDC WONDER database.")
                 ),
                 fluidRow(
-                    column(6,
+                    column(4,
                            uiOutput("causeOfDeathFilter")
                            ),
+                    column(2,
+                           uiOutput("ageGroupFilter")
+                            ),
                     column(2,
                            radioButtons("g", "Gender:",
                                         choiceNames = list(
@@ -43,6 +47,7 @@ body <- dashboardBody(
                                         ),
                                         choiceValues = list("all", "m", "f")
                             )
+                           
                     ),
                     column(2,
                            radioButtons("r", "Race:",
@@ -58,21 +63,23 @@ body <- dashboardBody(
                                             "Gender", "Race"
                                         ),
                                         choiceValues = list("g", "r")
-                            )
+                            ),
+                        checkboxInput(inputId="animate", label="Animated Plots")
                     )
                            
                 ),
                 fluidRow(
-                    box(plotOutput("totalAnnual", height="200px")
-                        ),
-                    box(plotOutput("totalMonthly", height="200px")
+                    box(plotOutput("totalAnnual", height="200px") %>% 
+                            withSpinner(color="#3C8D8C")
+                        )  ,
+                    box(uiOutput("totalMonthlyUI", height="200px")
                         )
                 ),
                 fluidRow(
-                    box(plotOutput("ageDist", height="200px")
-                        )#,
-                    #box(plotOutput("totalRegion")
-                     #   )
+                    box(uiOutput("ageDistUI", height="200px")
+                        ) ,
+                    box(verbatimTextOutput("stats")
+                        )
                 ),
                 fluidRow(
                     column(6,
@@ -83,7 +90,6 @@ body <- dashboardBody(
                 uiOutput("about")
         )
     )
-    
 )
 
 # Create App UI
