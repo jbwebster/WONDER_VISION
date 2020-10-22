@@ -290,9 +290,9 @@ shinyServer(function(input, output, session) {
     
     output$totalMonthlyUI <- renderUI({
         if (!input$animate) {
-            plotOutput("totalMonthly", height="200px") %>% withSpinner(color="#3C8D8C")
+            plotOutput("totalMonthly", height="200px") %>% withSpinner(color="#3C8DBC")
         } else {
-            imageOutput("totalMonthlyAnimate", height="200px") %>% withSpinner(color="#3C8D8C")
+            imageOutput("totalMonthlyAnimate", height="200px") %>% withSpinner(color="#3C8DBC")
         }
     })
     
