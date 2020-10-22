@@ -12,6 +12,7 @@ library(scales)
 library(maps)
 library(gganimate)
 library(ggthemr)
+library(gifski)
 
 
 # Define server logic 
@@ -105,12 +106,14 @@ shinyServer(function(input, output, session) {
                          title = "Deaths by Month, {closest_state}")
            
         }
-        anim_save("outfile.gif", animate(p))
+ 
+        animate(p, nframes=100, 
+                renderer=gifski_renderer("outfile.gif"), end_pause=10)
         list(src="outfile.gif",
              contentType='image/gif',
              height = 200,
-             width=width )}, deleteFile=T)
-   # })
+             width=width )}, deleteFile=T
+    )
     
     output$totalMonthly <- renderPlot({
         df_cod <- subsetDF(input, data)
@@ -182,11 +185,13 @@ shinyServer(function(input, output, session) {
                 labs(title = "Age of Deceased Persons, {closest_state}",
                      x="Age Group", y="Total Deaths")           
         }  
-        anim_save("outfile.gif", animate(p))
+        animate(p, nframes=100, 
+                renderer=gifski_renderer("outfile.gif"), end_pause=10)
         list(src="outfile.gif",
              contentType='image/gif',
              height = 200,
-             width=width )}, deleteFile=T)
+             width=width )}, deleteFile=T
+        )
     
     output$ageDist <- renderPlot({
         df_cod <- subsetDF(input, data)
@@ -231,7 +236,6 @@ shinyServer(function(input, output, session) {
                 Unable to render plots.\n")
         } else {
             cat("PRINT SUMMARY STATS HERE\n")
-            print(input$animate)
         }
     })
     
@@ -294,9 +298,9 @@ shinyServer(function(input, output, session) {
     
     output$ageDistUI <- renderUI({
         if (!input$animate) {
-            plotOutput("ageDist", height="200px") %>% withSpinner(color="#3C8D8C")
+            plotOutput("ageDist", height="200px") %>% withSpinner(color="#3C8DBC")
         } else {
-            imageOutput("ageDistAnimate", height="200px") %>% withSpinner(color="#3C8D8C")
+            imageOutput("ageDistAnimate", height="200px") %>% withSpinner(color="#3C8DBC")
         }
     })
     

@@ -1,14 +1,8 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+
 
 library(shinydashboard)
 library(shinycssloaders)
+
 
 # Contents of app header
 header <- dashboardHeader(
@@ -69,8 +63,7 @@ body <- dashboardBody(
                            
                 ),
                 fluidRow(
-                    box(plotOutput("totalAnnual", height="200px") %>% 
-                            withSpinner(color="#3C8D8C")
+                    box(withSpinner(plotOutput("totalAnnual", height="200px"), color="#3C8DBC") 
                         )  ,
                     box(uiOutput("totalMonthlyUI", height="200px")
                         )
